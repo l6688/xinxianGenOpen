@@ -1,0 +1,54 @@
+package ${packageBase}.core.service;
+
+import ${packageBase}.bean.po.${entityName};
+
+import java.util.List;
+
+/**
+ * @ClassName ${entityName}Service
+ * @Description ${entityDesc}服务
+ * @Author ${author}
+ * @Date ${date}
+ */
+public interface ${entityName}Service {
+
+    /**
+     * 按主键删除数据
+     *
+     * @param record {@link ${entityName}}
+     */
+    void deleteByPrimaryKey(${entityName} record);
+
+    /**
+     * 增加
+     *
+     * @param record {@link ${entityName}}
+     * @return {@link int}
+     */
+    int insert(${entityName} record);
+
+    /**
+     * 按主键查找数据
+     *
+     * @param id {@link Long}
+     * @return {@link ${entityName}}
+     */
+    ${entityName} selectByPrimaryKey(Long id);
+
+    /**
+     * 按主键修改已选字段
+     *
+     * @param record {@link ${entityName}}
+     * @return {@link int}
+     */
+    int updateByPrimaryKeySelective(${entityName} record);
+
+    /**
+     * 按条件查询
+     *
+     * @param record {@link ${entityName}}
+     * @return {@link List<${entityName}>}
+     */
+    List<${entityName}> selectByCondition(${entityName} record);
+
+}

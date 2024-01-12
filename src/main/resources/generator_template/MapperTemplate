@@ -1,0 +1,20 @@
+package ${packageBase}.core.mapper;
+
+import ${packageBase}.bean.po.${entityName};
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+public interface ${entityName}Mapper {
+
+    int insert(@Param("record") ${entityName} record);
+
+    int deleteByPrimaryKey(@Param("record") ${entityName} record);
+
+    ${entityName} selectByPrimaryKey(Long id);
+
+    int updateByPrimaryKeySelective(${entityName} record);
+
+    List<${entityName}> selectByCondition(${entityName} record);
+
+}

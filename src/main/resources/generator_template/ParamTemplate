@@ -1,0 +1,22 @@
+package ${packageBase}.bean.view;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * @ClassName ${entityName}View
+ * @Description ${entityDesc}参数
+ * @Author ${author}
+ * @Date ${date}
+ */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ${entityName}View {
+
+${expansionPoint}
+${entityField}
+}

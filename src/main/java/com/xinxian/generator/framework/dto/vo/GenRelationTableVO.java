@@ -1,0 +1,30 @@
+package com.xinxian.generator.framework.dto.vo;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+/**
+ * @ClassName GenQueryField
+ * @Description 前端查询
+ * @Author lmy
+ * @Date 2023/5/9 08:22
+ */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class GenRelationTableVO {
+
+    private String relationType;
+    private String mainTable;
+    private String slaveTable;
+    private String slaveRelationField;
+    private String slaveEntityDesc;
+    private String mainEntityDesc;
+    private List<String> checkParamFields;
+
+}

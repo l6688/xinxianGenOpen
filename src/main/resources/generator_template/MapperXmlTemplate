@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="${namespace}">
+    <resultMap id="BaseResultMap" type="${entityPath}">
+        ${baseResultMap}
+    </resultMap>
+    <sql id="Base_Column_List">
+        ${Base_Column_List}
+    </sql>
+    <sql id="Base_Select">
+        select
+        <include refid="Base_Column_List"/>
+        from ${tableName}
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        <include refid="Base_Select"/>
+        where id = #{id,jdbcType=BIGINT}
+        and status = 1
+    </select>
+    <insert id="insert" parameterType="${entityPath}" useGeneratedKeys="true"
+            keyProperty="record.id">
+        insert into ${tableName} (<include refid="insert_field"/>) values
+        (<include refid="insert_value"/>)
+    </insert>
+    <sql id="insert_field">
+        ${insert_field}
+    </sql>
+    <sql id="insert_value">
+        ${insert_value}
+    </sql>
+    <update id="updateByPrimaryKeySelective" parameterType="${entityPath}">
+        update ${tableName}
+        <set>
+${updateByCondition}
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="selectByCondition" parameterType="${entityPath}"
+            resultMap="BaseResultMap">
+        <include refid="Base_Select"/>
+        <where>
+${selectByCondition}
+        </where>
+        order by create_time desc
+    </select>
+    <sql id="delete_sql">
+        update ${tableName} set status = 0,
+${uniqueFieldDelete}
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        update_user_id = #{record.updateUserId,jdbcType=BIGINT},
+        update_by = #{record.updateBy,jdbcType=VARCHAR}
+    </sql>
+    <delete id="deleteByPrimaryKey" parameterType="${entityPath}">
+        <include refid="delete_sql"/>
+        where id = #{record.id,jdbcType=BIGINT}
+        <if test="record.createUserId != null ">and create_user_id = #{record.createUserId}</if>
+     </delete>
+</mapper>

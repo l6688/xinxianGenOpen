@@ -1,0 +1,75 @@
+package ${packageBase}.core.converter;
+
+import com.google.common.collect.Lists;
+import ${packageBase}.bean.po.${entityName};
+import ${packageBase}.bean.view.${entityName}View;
+import ${packageBase}.core.util.DateUtils;
+import org.apache.commons.collections4.CollectionUtils;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * @ClassName ${entityName}Converter
+ * @Description ${entityDesc}转换器
+ * @Author ${author}
+ * @Date ${date}
+ */
+public class ${entityName}Converter {
+
+    /**
+     * 转为${entityDesc}列表
+     *
+     * @param params {@link List<${entityName}View>}
+     * @return {@link List<${entityName}>}
+     */
+    public static List<${entityName}> convertToList${entityName}(List<${entityName}View> params) {
+        List<${entityName}> results = Lists.newArrayList();
+        if (CollectionUtils.isEmpty(params)) {
+            return results;
+        }
+        return params.stream().map(${entityName}Converter::convertTo${entityName}).collect(Collectors.toList());
+    }
+
+    /**
+     * 转为${entityDesc}
+     *
+     * @param param {@link ${entityName}View}
+     * @return {@link ${entityName}}
+     */
+    public static ${entityName} convertTo${entityName}(${entityName}View param) {
+        if (param == null) {
+            return null;
+        }
+        ${entityName} result = ${newEntity}
+        return result;
+    }
+
+    /**
+     * 转为${entityDesc}返回值列表
+     *
+     * @param list {@link List<${entityName}>}
+     * @return {@link List<${entityName}View>}
+     */
+    public static List<${entityName}View> convertToList${entityName}View(List<${entityName}> list) {
+        List<${entityName}View> results = Lists.newArrayList();
+        if (CollectionUtils.isEmpty(list)) {
+            return results;
+        }
+        return list.stream().map(${entityName}Converter::convertTo${entityName}View).collect(Collectors.toList());
+    }
+
+    /**
+     * 转为${entityDesc}返回值
+     *
+     * @param record {@link ${entityName}}
+     * @return {@link ${entityName}View}
+     */
+    public static ${entityName}View convertTo${entityName}View(${entityName} record) {
+        if (record == null) {
+            return null;
+        }
+        ${entityName}View result = ${newResultEntity}
+        return result;
+    }
+}

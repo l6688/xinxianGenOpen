@@ -1,0 +1,22 @@
+package ${packageBase}.dto.results;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * @ClassName ${entityName}Result
+ * @Description ${entityDesc}返回值
+ * @Author ${author}
+ * @Date ${date}
+ */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ${entityName}Result {
+
+${expansionPoint}
+${entityField}
+}

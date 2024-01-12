@@ -1,0 +1,126 @@
+package ${packageBase}.core.service.imp;
+
+import cn.hutool.core.date.DateUtil;
+import ${packageBase}.bean.po.${entityName};
+import ${packageBase}.core.exception.ApiResultException;
+import ${packageBase}.core.mapper.${entityName}Mapper;
+import ${packageBase}.bean.base.${errorCodeEnum};
+import ${packageBase}.core.service.${entityName}Service;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+/**
+ * @ClassName ${entityName}ServiceImpl
+ * @Description ${entityDesc}服务实现类
+ * @Author ${author}
+ * @Date ${date}
+ */
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class ${entityName}ServiceImpl implements ${entityName}Service {
+
+    private final ${entityName}Mapper mapper;
+
+    @Override
+    public void deleteByPrimaryKey(${entityName} record) {
+        if (record == null) {
+            return;
+        }
+        deletePrepare(record);
+        mapper.deleteByPrimaryKey(record);
+    }
+
+    @Override
+    public int insert(${entityName} record) {
+        if (record == null) {
+            return 0;
+        }
+        deleteDuplicateUniqueKey(Arrays.asList(record));
+        insertPrepare(record, true);
+        return mapper.insert(record);
+    }
+
+    @Override
+    public ${entityName} selectByPrimaryKey(Long id) {
+        if (id == null) {
+            return null;
+        }
+        return mapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(${entityName} record) {
+        if (record == null) {
+            return 0;
+        }
+        updatePrepare(record);
+        return mapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public List<${entityName}> selectByCondition(${entityName} record) {
+        if (record == null) {
+            return null;
+        }
+        record.setIsDelete(0);
+        return mapper.selectByCondition(record);
+    }
+
+    /**
+     * 增加前的准备
+     *
+     * @param record {@link ${entityName}}
+     * @return {@link ${entityName}}
+     */
+    private ${entityName} insertPrepare(${entityName} record, Boolean checkUnique) {
+        record.setId(null);
+        record.setUpdateTime(DateUtil.date());
+        record.setCreateTime(DateUtil.date());
+        record.setCreateBy(record.getUpdateBy());
+        record.setIsDelete(0);
+        if(checkUnique){
+            checkUnique(record);
+        }
+        return record;
+    }
+
+    /**
+     * 修改前的准备
+     *
+     * @param record {@link ${entityName}}
+     * @return {@link ${entityName}}
+     */
+    private ${entityName} updatePrepare(${entityName} record) {
+        checkUnique(record);
+        record.setUpdateTime(DateUtil.date());
+        return record;
+    }
+
+    /**
+     * 删除前的准备
+     *
+     * @param record {@link ${entityName}}
+     * @return {@link ${entityName}}
+     */
+    private ${entityName} deletePrepare(${entityName} record) {
+        record.setUpdateTime(DateUtil.date());
+        record.setCreateBy(record.getUpdateBy());
+        return record;
+    }
+
+    /**
+     * 唯一约束检查
+     *
+     * @param record {@link ${entityName}}
+     * @return
+     */
+    private void checkUnique(${entityName} record) {
+${uniqueFieldCallCheckUniqueCombine}    }
+
+${uniqueFieldMethodCheckUniqueCombine}
+}

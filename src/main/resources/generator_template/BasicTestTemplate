@@ -1,0 +1,28 @@
+package ${packageBase}.test;
+
+import ${packageBase}.rest.${application}RestApplication;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+/**
+ * @ClassName BasicTest
+ * @Description 基础测试
+ * @Author ${author}
+ * @Date ${date}
+ */
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = ${application}RestApplication.class)
+public class BasicTest {
+
+    /* BasicTestInjectStart */
+    /* BasicTestInjectEnd */
+
+    @Test
+    public void execTest() {
+        /* BasicTestExecStart */
+        /* BasicTestExecEnd */
+    }
+}

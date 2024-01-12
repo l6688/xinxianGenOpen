@@ -1,0 +1,152 @@
+package ${packageBase}.dto.params;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Date;
+
+/**
+ * 基础参数
+ */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class BaseParam {
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 创建者id
+     */
+    private Long createUserId;
+
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
+
+    /**
+     * 更新者id
+     */
+    private Long updateUserId;
+
+    /**
+     * 创建者
+     */
+    private String createBy;
+
+    /**
+     * 更新者
+     */
+    private String updateBy;
+
+    /**
+     * 0删除 1正常
+     */
+    private Integer status;
+
+    /**
+     * 更新者邮箱
+     */
+    private String updateUserEmail;
+
+    /**
+     * 更新者部门名称
+     */
+    private String updateUserDept;
+
+    /**
+     * 页码下标
+     */
+    private Integer page;
+
+    /**
+     * 每页条数
+     */
+    private Integer pageSize;
+
+    public static BaseParamBuilder buildClass() {
+        return new BaseParamBuilder();
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class BaseParamBuilder {
+        private Date createTime;
+        private Long createUserId;
+        private Date updateTime;
+        private Long updateUserId;
+        private String createBy;
+        private String updateBy;
+        private Integer status;
+        private String updateUserEmail;
+        private String updateUserDept;
+        private Integer page;
+        private Integer pageSize;
+
+        public BaseParamBuilder createTime(final Date createTime) {
+            this.createTime = createTime;
+            return this;
+        }
+
+        public BaseParamBuilder createTime(final Long createUserId) {
+            this.createUserId = createUserId;
+            return this;
+        }
+
+        public BaseParamBuilder updateTime(final Date updateTime) {
+            this.updateTime = updateTime;
+            return this;
+        }
+
+        public BaseParamBuilder updateUserId(final Long updateUserId) {
+            this.updateUserId = updateUserId;
+            return this;
+        }
+
+        public BaseParamBuilder createBy(final String createBy) {
+            this.createBy = createBy;
+            return this;
+        }
+
+        public BaseParamBuilder updateBy(final String updateBy) {
+            this.updateBy = updateBy;
+            return this;
+        }
+
+        public BaseParamBuilder status(final Integer status) {
+            this.status = status;
+            return this;
+        }
+
+        public BaseParamBuilder updateUserEmail(final String updateUserEmail) {
+            this.updateUserEmail = updateUserEmail;
+            return this;
+        }
+
+        public BaseParamBuilder updateUserDept(final String updateUserDept) {
+            this.updateUserDept = updateUserDept;
+            return this;
+        }
+
+        public BaseParamBuilder page(final Integer page) {
+            this.page = page;
+            return this;
+        }
+
+        public BaseParamBuilder pageSize(final Integer pageSize) {
+            this.pageSize = pageSize;
+            return this;
+        }
+
+        public BaseParam build() {
+            return new BaseParam(this.createTime, this.createUserId, this.updateTime, this.updateUserId, this.createBy, this.updateBy,
+                    this.status, this.updateUserEmail, this.updateUserDept, this.page, this.pageSize);
+        }
+    }
+}

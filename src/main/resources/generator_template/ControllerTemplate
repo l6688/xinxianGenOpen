@@ -1,0 +1,117 @@
+package ${packageBase}.web.controller;
+
+import com.github.pagehelper.PageInfo;
+import ${packageBase}.bean.base.EnumResultMsg;
+import ${packageBase}.bean.base.R;
+import ${packageBase}.bean.base.TianGangResult;
+import ${packageBase}.bean.po.${entityName};
+import ${packageBase}.common.annotation.WebLog;
+import com.jinke.kb.core.converter.${entityName}Converter;
+import ${packageBase}.core.service.${bizClassName}Service;
+import ${packageBase}.bean.view.${entityName}View;
+import ${packageBase}.web.utils.PageInfoUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * @ClassName ${bizClassName}Controller
+ * @Description ${entityDesc}controller
+ * @Author ${author}
+ * @Date ${date}
+ */
+@Slf4j
+@RestController
+@RequestMapping("${requestMapping}")
+public class ${bizClassName}Controller {
+
+    @Autowired
+    private ${bizClassName}Service ${shortClassName}Service;
+
+    /**
+     * ${entityDesc}列表
+     *
+     * @param param {@link ${entityName}View}
+     * @return {@link TianGangResult}
+     */
+    @PostMapping("/list")
+    @WebLog(description = "${entityDesc}列表")
+    public TianGangResult list(@RequestBody ${entityName}View param) {
+        try {
+            ${entityName} record = ${entityName}Converter.convertTo${entityName}(param);
+            List<${entityName}> list = ${shortClassName}Service.selectByCondition(record);
+            List<${entityName}View> results = ${entityName}Converter.convertToList${entityName}View(list);
+            PageInfo<?> pageInfo = PageInfoUtils.list2PageInfo(results, param.getPage(), param.getPageSize());
+            Map<String, Object> m = new HashMap<>();
+            m.put("dataLs", pageInfo.getList());
+            m.put("pageNum", pageInfo.getPageNum());
+            m.put("total", pageInfo.getTotal());
+            return TianGangResult.data(m);
+        } catch (Exception e) {
+            return TianGangResult.error(EnumResultMsg.EVALUATE_FIND_ERROR);
+        }
+    }
+
+    /**
+     * ${entityDesc}明细
+     *
+     * @param param {@link ${entityName}View}
+     * @return {@link TianGangResult}
+     */
+    @PostMapping("/detail")
+    @WebLog(description = "${entityDesc}明细")
+    public TianGangResult detail(@RequestBody ${entityName}View param) {
+        ${entityName} detail = ${shortClassName}Service.selectByPrimaryKey(param.getId());
+        ${entityName}View result = ${entityName}Converter.convertTo${entityName}View(detail);
+        return TianGangResult.data(result);
+    }
+
+    /**
+     * 增加${entityDesc}
+     *
+     * @param param   {@link ${entityName}View}
+     * @return {@link TianGangResult}
+     */
+    @PostMapping("/add")
+    @WebLog(description = "增加${entityDesc}")
+    public TianGangResult add(@RequestBody ${entityName}View param) {
+        ${entityName} record = ${entityName}Converter.convertTo${entityName}(param);
+        Integer id = ${shortClassName}Service.insert(record);
+        return TianGangResult.data(id);
+    }
+
+    /**
+     * 更新${entityDesc}
+     *
+     * @param param {@link ${entityName}View}
+     * @return {@link TianGangResult}
+     */
+    @PostMapping("/update")
+    @WebLog(description = "更新${entityDesc}")
+    public TianGangResult update(@RequestBody ${entityName}View param) {
+        ${entityName} record = ${entityName}Converter.convertTo${entityName}(param);
+        ${shortClassName}Service.updateByPrimaryKeySelective(record);
+        return TianGangResult.ok(R.ok());
+    }
+
+    /**
+     * 删除${entityDesc}
+     *
+     * @param param {@link ${entityName}View}
+     * @return {@link TianGangResult}
+     */
+    @PostMapping("/deleteById")
+    @WebLog(description = "删除${entityDesc}")
+    public TianGangResult deleteById(@RequestBody ${entityName}View param) {
+        ${entityName} record = ${entityName}Converter.convertTo${entityName}(param);
+        ${shortClassName}Service.deleteByPrimaryKey(record);
+        return TianGangResult.ok(R.ok());
+    }
+}
